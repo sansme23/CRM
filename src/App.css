@@ -1,0 +1,88 @@
+/* Grundlæggende styling */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: left;
+  height: 100vh;
+  padding-left: 7em;
+  padding-top: 7em;
+  background-color: #f4f4f4;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 2em;
+  color: #213547;
+}
+
+/* Styling af formularen og felterne */
+form {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  background-color: #fff;
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+ 
+}
+
+input,
+select,
+button {
+  padding: 10px;
+  padding-right: 4em;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+ 
+}
+
+input::placeholder,
+select::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+button {
+  background-color: #586571;
+  width: 8em;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #14354f;
+}
+
+/* For inputfelter og select, hvis de er tomme (skal udfyldes) */
+input:required::placeholder,
+select:required::placeholder {
+  color: rgb(187, 187, 197);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #2b2b2b;
+    color: white;
+  }
+
+  form {
+    background-color: #434343;
+  }
+
+  input,
+  select,
+  button {
+    background-color: #292d15;
+    color: #ddd;
+    border: 1px solid #444;
+  }
+
+  button:hover {
+    background-color: #212221;
+  }
+}
