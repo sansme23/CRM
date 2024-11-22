@@ -1,11 +1,10 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
-// Definer kundetype
 const categories = {
-  good: '#00796b', // Grøn (dark teal)
-  medium: '#ffeb3b', // Gul
-  poor: '#d32f2f', // Rød (dark red)
+  good: '#00796b', // 
+  medium: '#DF8320', // Gul
+  poor: 'DF2020', // Rød
 };
 
 function App() {
@@ -15,13 +14,13 @@ function App() {
     region: '',
     telefon: '',
     email: '',
-    kategori: 'good', // Default kategori
+    kategori: 'good',
   });
 
   const [customers, setCustomers] = useState([]);
-  const [view, setView] = useState('home'); // Tilstand for visning: home, add eller list
+  const [view, setView] = useState('home');
+  const [filterRegion, setFilterRegion] = useState('');
 
-  // Håndterer inputændringer
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -30,7 +29,6 @@ function App() {
     }));
   };
 
-  // Håndterer formularindsendelse
   const onSubmit = (e) => {
     e.preventDefault();
     setCustomers((prevCustomers) => [...prevCustomers, formData]);
@@ -40,22 +38,20 @@ function App() {
       region: '',
       telefon: '',
       email: '',
-      kategori: 'good', // Reset kategori til grøn
+      kategori: 'good',
     });
-    setView('list'); // Skift til kundeliste view efter indsending
+    setView('list');
   };
 
-  // Funktion til at sortere kunder efter kategori
-  const sortCustomers = (customers) => {
-    const categoryOrder = ['good', 'medium', 'poor'];
-    return customers.sort((a, b) => {
-      return categoryOrder.indexOf(a.kategori) - categoryOrder.indexOf(b.kategori);
-    });
-  };
-
-  // Håndterer sletning af en kunde
   const deleteCustomer = (index) => {
     setCustomers((prevCustomers) => prevCustomers.filter((_, i) => i !== index));
+  };
+
+  const sortCustomers = () => {
+    if (filterRegion) {
+      return customers.filter((customer) => customer.region === filterRegion);
+    }
+    return customers;
   };
 
   return (
@@ -133,15 +129,30 @@ function App() {
       {view === 'list' && (
         <div className="customer-list">
           <h2>Kundeliste</h2>
+          <div className="filter-controls">
+            <label htmlFor="filterRegion">Filtrer efter region:</label>
+            <select
+              id="filterRegion"
+              value={filterRegion}
+              onChange={(e) => setFilterRegion(e.target.value)}
+            >
+              <option value="">Alle regioner</option>
+              <option value="Fyn">Fyn</option>
+              <option value="Sjælland">Sjælland</option>
+              <option value="Jylland">Jylland</option>
+            </select>
+          </div>
           <ul>
-            {sortCustomers(customers).map((customer, index) => (
+            {sortCustomers().map((customer, index) => (
               <li key={index} className={customer.kategori}>
-                <p>{customer.fornavn} {customer.efternavn}</p>
+                <p>
+                  {customer.fornavn} {customer.efternavn}
+                </p>
                 <p>{customer.telefon}</p>
                 <p>{customer.email}</p>
                 <p>{customer.region}</p>
                 <p style={{ color: categories[customer.kategori] }}>
-                  {customer.kategori === 'good' ? 'God' : customer.kategori === 'Primær' ? 'Sekundær' : 'Ukendt'}
+                  {customer.kategori === 'good' ? 'God' : customer.kategori === 'medium' ? 'Medium' : 'Dårlig'}
                 </p>
                 <button onClick={() => deleteCustomer(index)}>Slet</button>
               </li>
