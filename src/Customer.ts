@@ -8,12 +8,21 @@ interface FormData {
   region: string;
 }
 
+interface Customer {
+  fornavn: string;
+  efternavn: string;
+  region: string;
+}
+
+
 function App() {
   const [formData, setFormData] = useState<FormData>({
     fornavn: '',
     efternavn: '',
     region: ''
   });
+
+  const [customers, setCustomers] = useState<Customer[]>([]);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -25,9 +34,14 @@ function App() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+    setCustomers((prevCustomers) => [...prevCustomers, formData]);
+    setFormData({
+      fornavn:'',
+      efternavn:'',
+      region:''
+  });
   };
-
+  
   return 
 }
 

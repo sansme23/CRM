@@ -1,88 +1,201 @@
-/* Grundlæggende styling */
+/* Generelle styles */
 body {
-  font-family: sans-serif;
+  font-family: 'Arial', sans-serif;
   margin: 0;
+  padding: 0;
+  background-color: #a0adaa;
+  color: black;
+  line-height: 1.6;
+  font-size: 18px; /* Standard skriftstørrelse */
   display: flex;
-  justify-content: left;
-  height: 100vh;
-  padding-left: 7em;
-  padding-top: 7em;
-  background-color: #f4f4f4;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  max-width: 100vw;
 }
 
-h1 {
-  font-size: 2em;
-  margin-bottom: 2em;
-  color: #213547;
-}
-
-/* Styling af formularen og felterne */
-form {
-  display: flex;
-  flex-direction: row;
-  gap: 1em;
-  background-color: #fff;
-  padding: 2em;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* App Container */
+.App {
   width: 100%;
- 
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-input,
-select,
+/* Hjemmeside (Forside) */
+.home-page {
+  text-align: center;
+  margin-top: 3em;
+}
+
+.home-page h1 {
+  font-size: 3rem; /* Standard størrelse */
+  margin-bottom: 1.5em;
+}
+
+/* Knapper */
 button {
-  padding: 10px;
-  padding-right: 4em;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
- 
-}
-
-input::placeholder,
-select::placeholder {
-  color: #999;
-  font-style: italic;
-}
-
-button {
-  background-color: #586571;
-  width: 8em;
+  font-size: 1rem;
+  padding: 0.75em 1.5em;
+  margin: 10px;
+  border: none;
+  background-color: #617575;
   color: white;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #14354f;
+  background-color: #104a40;
 }
 
-/* For inputfelter og select, hvis de er tomme (skal udfyldes) */
-input:required::placeholder,
-select:required::placeholder {
-  color: rgb(187, 187, 197);
+/* Kundeformular */
+.customer-form {
+  background: #fff;
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 90vw;
+  margin: 20px auto;
 }
 
-@media (prefers-color-scheme: dark) {
+.customer-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+input, select {
+  font-size: 1rem;
+  padding: 0.75em;
+  margin-bottom: 15px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+button[type="submit"] {
+  background-color: #00796b;
+  width: 100%;
+  padding: 0.75em;
+  font-size: 1.25rem;
+  margin-top: 10px;
+}
+
+/* Kundeliste */
+.customer-list {
+  background: #fff;
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 1200px; /* Desktop optimering */
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr; /* Mobilvisning */
+  grid-gap: 15px;
+}
+
+.customer-list li {
+  padding: 1em;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #fafafa;
+}
+
+li.good {
+  background-color: #00796b;
+  color: white;
+}
+
+li.medium {
+  background-color: #584a0f;
+  color: white;
+}
+
+li.poor {
+  background-color: #843009;
+  color: white;
+}
+
+/* Media Queries */
+
+/* Mobil (480px og mindre) */
+@media (max-width: 100vw) {
   body {
-    background-color: #2b2b2b;
-    color: white;
+    font-size: 1.5em;
   }
 
-  form {
-    background-color: #434343;
+  .home-page h1 {
+    font-size: 1.5rem;
   }
 
-  input,
-  select,
+  .customer-form {
+    padding: 1em;
+  }
+
+  .customer-list {
+    grid-template-columns: 1fr; /* En kolonne */
+  }
+
   button {
-    background-color: #292d15;
-    color: #ddd;
-    border: 1px solid #444;
+    font-size: 0.8rem;
+    padding: 0.5em;
   }
 
-  button:hover {
-    background-color: #212221;
+  li {
+    font-size: 0.9rem;
   }
 }
+
+
+
+
+
+
+/* Tablet (768px og mindre) */
+@media (max-width: 768px) {
+  body {
+    font-size: 2em;
+    
+  }
+
+  .home-page h1 {
+    font-size: 4rem;
+  }
+
+  .customer-form {
+    padding: 1em;
+  }
+
+  .customer-list {
+    grid-template-columns: 1fr 0.5fr; /* To kolonner */
+  }
+
+  button {
+    font-size: 2rem;
+    padding: 0.5em 1em;
+  }
+}
+
+
+
+/* Desktop (769px og større) */
+@media (min-width: 769px) {
+  .customer-list {
+    grid-template-rows: repeat(2, 1fr); /* Tre kolonner */
+  }
+
+  button {
+    font-size: 1.1rem;
+    padding: 0.8em 1.5em;
+  }
+}
+
+
+
+
+
